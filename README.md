@@ -12,7 +12,8 @@ Prerequists to run the project:
 
 Instructions to run the peoject:
 
-1. Import the git project to eclipse.
+1. Import the project to local directory using git bash
+2. Import the local directory project into eclipse using import->existing maven project
 2. Build the project 
 3. Add  tomcat server and start it
 4. Add application to tomcat server and choose run on server.
@@ -23,7 +24,8 @@ Instructions to run the peoject:
 
 
 Application APIs:
-1. Create Partner API : http://localhost:8090/digitalad/webapi/adresource/addPartner
+--------------------------------------------------------------------------------------------------------------------
+1. Create Partner API :  http://localhost:8090/digitalad/webapi/campaign/partner/add
     Method Type : POST
     Input JSON body example:
                          {
@@ -38,8 +40,8 @@ Application APIs:
                             
                          }
  Note: Since to add a campaign we need partner id and save the same from above out put JSON.
- 
- 2. Add campaign API : http://localhost:8090/digitalad/webapi/adresource/addAd
+ ---------------------------------------------------------------------------------------------------------------------
+ 2. Add campaign API : http://localhost:8090/digitalad/webapi/campaign/ad/add
     Method Type: POST
     Input JSON body example:
                               {
@@ -54,8 +56,36 @@ Application APIs:
                               "adPartnerId": 1,
                                "created": "2017-07-16T16:35:18.298"
                       }
-                      
-3. Fetch campaign API for partner:
+ ----------------------------------------------------------------------------------------------------------------------                     
+3. Fetch campaign API for partner: http://localhost:8090/digitalad/webapi/campaign/partner/{Id}
+	Method Type : GET
+	Input value : Give partner id generated from step number 1. Ex: 1
+			http://localhost:8090/digitalad/webapi/campaign/partner/1
+-----------------------------------------------------------------------------------------------------------------------			
+4. Update Ad campaign API : http://localhost:8090/digitalad/webapi/campaign/ad/update
+	Note: Ad campaign will update/replace existing ad only if the ad is active.
+	Method Type: POST
+    Input JSON body example:
+                              {
+	                              "adPartnerId" : "1",
+	                              "adDuration":"180",
+	                              "adContent":"Comcast BlackFriday Deals!!!"
+                              }
+    Output JSON :
+                      {
+                              "adContent": "Christmas Independance Day Coupons",
+                              "adDuration": 180,
+                              "adPartnerId": 1,
+                               "created": "2017-07-16T16:35:18.298"
+                      }
+-----------------------------------------------------------------------------------------------------------------------		      
+5. List all ad campaigns API : http://localhost:8090/digitalad/webapi/campaign/ad/list
+	Note: This api will list all ads irrespective of partner and also includes non active ads aswell.
+-----------------------------------------------------------------------------------------------------------------------	
+	
+To test the application, I have used rest assured tool which is simple and behavior driven. The same can be found in test directory and you can run as JUNIT test.
+
+I hope, I have covered most of the functionalities listed in the requirement document. Please let me know if you have any questions.
 
 
 
